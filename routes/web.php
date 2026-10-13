@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\MahasiswaController;
+use App\Http\Controllers\ProdukController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -13,9 +15,9 @@ Route::get('/halo', function () {
 
 Route::get('/waktu', fn() => now()->format('d-m-Y H:i:s'));
 
-Route::get('/profil/{nama}', function (string $nama) {
-    return "Halo, {$nama}";
-});
+// Route::get('/profil/{nama}', function (string $nama) {
+//     return "Halo, {$nama}";
+// });
 
 Route::get('/kategori/{nama?}', function (?string $nama = 'semua') {
     return "Menampilkan kategori: {$nama}";
@@ -52,3 +54,10 @@ Route::redirect('/beranda', '/');
 Route::fallback(function () {
     return response('Halaman tidak ditemukan (kustom)', 404);
 });
+
+
+Route::get('/produk', [ProdukController::class, 'index'])->name('produk.index');
+Route::get('/produk/{id}', [ProdukController::class, 'show'])->name('produk.show');
+Route::resource('produk', ProdukController::class);
+
+Route::get('/profil', [MahasiswaController::class, 'profil'])->name('mahasiswa.profil');
