@@ -4,30 +4,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Daftar Mahasiswa</title>
 </head>
 
 <body>
-    <h1>Daftar Mahasiswa</h1>
     <table border='1'>
         <tr>
             <th>No</th>
             <th>Nama</th>
-            <th>Nim</th>
-            <th>Prodi</th>
+            <th>IPK</th>
             <th>Aksi</th>
         </tr>
-        @foreach ($mahasiswa as $mhs)
+        @forelse ($data as $d)
             <tr>
                 <td>{{ $loop->iteration }}</td>
-                <td>{{ $mhs['nama'] }}</td>
-                <td>{{ $mhs['nim'] }}</td>
-                <td>{{ $mhs['prodi'] }}</td>
+                <td>{{ $d['nama'] }}</td>
+                <td>{{ $d['nim'] }}</td>
                 <td>
-                    <a href="#">Detail</a>
+                    @if ($d['ipk'] > 3.5)
+                        Cum Laude
+                    @elseif ($d['ipk'] > 3.0)
+                        Baik
+                    @else
+                        Perlu ditingkatkan
+                    @endif
+                </td>
+                <td>
+                    <a href="{{ route('mahasiswa.show', $d['nim']) }}">Detail</a>
                 </td>
             </tr>
-        @endforeach
+        @empty
+            <tr>
+                <td colspan='5'>Belum ada data.</td>
+            </tr>
+        @endforelse
     </table>
 </body>
 

@@ -18,8 +18,9 @@ class ProdukController extends Controller
 
     public function show($id)
     {
+        $data = $id;
         abort_unless($id <= 2, 404);
-        return view('produk.show', ['id' => $id]);
+        return view('produk.show', compact('data'));
     }
 
     public function store(Request $request)

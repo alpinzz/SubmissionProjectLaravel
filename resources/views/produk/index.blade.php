@@ -15,7 +15,7 @@
             <tr>
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $p['nama'] }}</td>
-                <td>{{ $p['harga'] }}</td>
+                {{-- <td>{{ $p['harga'] }}</td> --}}
                 <td>Rp {{ number_format($p['harga'], 0, ',', '.') }}</td>
                 <td>
                     @if ($p['stok'] > 10)
